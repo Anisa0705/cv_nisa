@@ -1,0 +1,367 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap');
+
+:root {
+    --pink-soft: #FFD1DC;
+    --pink-dark: #FF91A4;
+    --blue-pastel: #B2CEFE;
+    --bg-light: #FFF9FB;
+    --text-color: #5A5A5A;
+}
+
+body {
+    font-family: 'Quicksand', sans-serif;
+    background-color: var(--bg-light);
+    color: var(--text-color);
+    margin: 0;
+    overflow-x: hidden;
+}
+
+/* Navigasi */
+nav {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 10%;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 15px rgba(255, 145, 164, 0.1);
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--pink-dark);
+    letter-spacing: 1px;
+}
+
+#menu {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+    margin: 0;
+}
+
+#menu li a {
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: 600;
+    transition: all 0.3s ease;
+    padding: 8px 15px;
+    border-radius: 20px;
+}
+
+#menu li a:hover {
+    background-color: var(--pink-soft);
+    color: white;
+}
+
+/* Kontainer Utama (Card Style) */
+#content-holder {
+    max-width: 700px;
+    margin: 50px auto;
+    background: white;
+    padding: 40px;
+    border-radius: 30px;
+    box-shadow: 0 15px 35px rgba(255, 178, 190, 0.2);
+    border: 2px solid #fff;
+    text-align: center;
+    min-height: 300px;
+}
+
+/* Foto Profil (Perbaikan tampilan yang pecah tadi) */
+.profile-img {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%; /* Membuat lingkaran sempurna */
+    border: 6px solid var(--pink-soft);
+    object-fit: cover; /* Agar foto tidak gepeng */
+    margin-bottom: 25px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+h1 {
+    color: var(--pink-dark);
+    font-size: 2.2rem;
+    margin-bottom: 10px;
+}
+
+p {
+    line-height: 1.8;
+    font-size: 1.1rem;
+    color: #777;
+}
+
+/* --- LEVEL 2: MOBILE RESPONSIVE --- */
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column;
+        gap: 15px;
+        padding: 20px;
+    }
+
+    #content-holder {
+        margin: 20px;
+        padding: 30px 20px;
+    }
+
+    .profile-img {
+        width: 140px;
+        height: 140px;
+    }
+}
+
+/* Styling Ikon Sosial Media */
+.social-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 25px;
+    align-items: center;
+}
+
+.social-card {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    text-decoration: none;
+    padding: 12px 25px;
+    width: 250px;
+    border-radius: 15px;
+    font-weight: 600;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    color: white;
+}
+
+.social-card i {
+    font-size: 1.5rem;
+}
+
+.social-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+/* Warna Pastel untuk masing-masing platform */
+.ig { background-color: #E1306C; } /* Instagram Pink */
+.wa { background-color: #25D366; } /* WhatsApp Green */
+.mail { background-color: #88a9c3; } /* Pastel Blue */
+
+.social-card span {
+    font-size: 1rem;
+}
+/* --- LEVEL 2: MOBILE RESPONSIVE --- */
+
+/* Breakpoint untuk Tablet & Smartphone (Maksimal lebar 768px) */
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column; /* Logo di atas, menu di bawah */
+        padding: 20px 5%;
+        gap: 15px;
+    }
+
+    .logo {
+        font-size: 1.5rem;
+    }
+
+    #menu {
+        gap: 10px;
+        padding: 0;
+        width: 100%;
+        justify-content: center;
+    }
+
+    #menu li a {
+        font-size: 0.9rem;
+        padding: 10px 12px; /* Area klik lebih luas untuk jari */
+        background-color: #fff;
+        border: 1px solid var(--pink-soft);
+    }
+
+    #content-holder {
+        margin: 20px 15px; /* Margin samping lebih tipis di HP */
+        padding: 30px 20px;
+        border-radius: 20px;
+        width: auto; /* Biar tidak melebar keluar layar */
+    }
+
+    .profile-img {
+        width: 140px;
+        height: 140px;
+        border-width: 4px;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    /* Penyesuaian Tombol Sosmed di HP */
+    .social-card {
+        width: 100%; /* Tombol melebar penuh di layar HP */
+        max-width: 300px;
+        padding: 15px;
+    }
+}
+
+/* Khusus Smartphone Kecil (Maksimal lebar 480px) */
+@media (max-width: 480px) {
+    #menu {
+        flex-wrap: wrap; /* Jika menu banyak, dia akan turun ke bawah */
+        justify-content: center;
+    }
+
+    #menu li {
+        flex: 1 1 30%; /* Membuat 3 menu berjejer rapi atau 2-1 */
+        text-align: center;
+    }
+
+    #menu li a {
+        display: block;
+        font-size: 0.8rem;
+    }
+}
+/* LEVEL 3 - UI/UX ENHANCER */
+
+/* Memperhalus tampilan card utama */
+#content-holder {
+    border: none;
+    background: linear-gradient(145deg, #ffffff, #fff5f7);
+    box-shadow: 20px 20px 60px #e6d5da, -20px -20px 60px #ffffff; /* Efek Neumorphism halus */
+    transition: all 0.4s ease;
+}
+
+/* Tipografi yang lebih nyaman dibaca (Readability) */
+p {
+    line-height: 1.8;
+    letter-spacing: 0.5px;
+    margin-bottom: 20px;
+    text-align: justify; /* Agar terlihat profesional */
+    text-justify: inter-word;
+}
+
+/* Tombol Menu yang lebih Touch-Friendly */
+#menu li a {
+    display: inline-block;
+    min-width: 80px;
+    text-align: center;
+    padding: 12px 20px;
+    border-radius: 15px;
+    background: transparent;
+    border: 2px solid transparent;
+}
+
+#menu li a:active {
+    transform: scale(0.95); /* Efek saat ditekan jari di HP */
+}
+
+/* Card Detail untuk di dalam Home/About */
+.detail-card {
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    margin: 15px 0;
+    border-left: 5px solid var(--pink-soft);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.02);
+    text-align: left;
+    transition: 0.3s;
+}
+
+.detail-card:hover {
+    box-shadow: 0 8px 25px rgba(255, 145, 164, 0.15);
+    transform: translateX(5px);
+}
+
+.skill-tag {
+    display: inline-block;
+    background: var(--blue-pastel);
+    color: white;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    margin: 5px;
+    font-weight: 600;
+}
+/* LEVEL 4 - INTERACTIVE ELEMENTS */
+
+/* Indikator Menu Aktif */
+#menu li a.active {
+    background-color: var(--pink-dark);
+    color: white !important;
+    box-shadow: 0 4px 10px rgba(255, 145, 164, 0.3);
+    transform: translateY(-2px);
+}
+
+/* Animasi Hover tambahan pada Profile Image */
+.profile-img {
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    cursor: pointer;
+}
+
+.profile-img:hover {
+    transform: scale(1.05) rotate(3deg);
+}
+
+/* Feedback saat Card diklik */
+.detail-card:active {
+    transform: scale(0.98);
+    background-color: #fffef2; /* Sedikit berubah warna saat ditekan */
+}
+/* LEVEL 5 - SMART FORM */
+.input-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.form-input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid var(--pink-soft);
+    border-radius: 12px;
+    font-family: inherit;
+    box-sizing: border-box;
+    transition: 0.3s;
+    outline: none;
+}
+
+.form-input:focus {
+    border-color: var(--pink-dark);
+    box-shadow: 0 0 8px rgba(255, 145, 164, 0.2);
+}
+
+.input-error {
+    border-color: #ff7675 !important;
+}
+
+.error-msg {
+    color: #ff7675;
+    font-size: 0.8rem;
+    margin-top: 5px;
+    display: block;
+}
+
+.btn-send {
+    background-color: var(--pink-dark);
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 50px;
+    font-weight: 600;
+    cursor: pointer;
+    width: 100%;
+    transition: 0.3s;
+}
+
+.btn-send:hover {
+    background-color: #f06292;
+    transform: translateY(-2px);
+}
+
+.success-alert {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+    padding: 20px;
+    border-radius: 15px;
+    font-weight: 600;
+}

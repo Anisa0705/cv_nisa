@@ -1,0 +1,101 @@
+<div class="page-content">
+    <h2>Let's Connect! ✨</h2>
+    <p>Data yang Anda ketik akan tersimpan otomatis di browser ini.</p>
+    
+    <div class="detail-card">
+        <h3 style="color: var(--pink-dark); margin-top: 0; text-align: center;">Send a Message</h3>
+        
+        <form id="contactForm">
+            <div class="input-group">
+                <input type="text" id="name" placeholder="Nama Lengkap" class="form-input">
+                <small class="error-msg" id="nameError"></small>
+            </div>
+            
+            <div class="input-group">
+                <input type="email" id="email" placeholder="Email Anda" class="form-input">
+                <small class="error-msg" id="emailError"></small>
+            </div>
+            
+            <div class="input-group">
+                <textarea id="message" placeholder="Pesan Anda..." rows="4" class="form-input"></textarea>
+                <small class="error-msg" id="messageError"></small>
+            </div>
+            
+            <button type="submit" class="btn-send">
+                Kirim Pesan <i class="fas fa-paper-plane" style="margin-left: 8px;"></i>
+            </button>
+        </form>
+
+        <div id="formSuccess" class="success-alert" style="display:none; text-align: center;">
+            <i class="fas fa-check-circle" style="font-size: 2rem; display: block; margin-bottom: 10px;"></i>
+            🎉 Pesan terkirim & Data lokal dibersihkan!
+        </div>
+    </div>
+
+    <div class="social-container" style="margin-top: 30px;">
+        <a href="https://instagram.com/anislsbll" target="_blank" class="social-card ig">
+            <i class="fab fa-instagram"></i> <span>@anislsbll</span>
+        </a>
+        <a href="https://wa.me/6289691116560" target="_blank" class="social-card wa">
+            <i class="fab fa-whatsapp"></i> <span>0896-9111-6560</span>
+        </a>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        // --- LOGIKA LEVEL 6: LOAD DATA DARI LOCAL STORAGE ---
+        if (localStorage.getItem("contact_name")) $("#name").val(localStorage.getItem("contact_name"));
+        if (localStorage.getItem("contact_email")) $("#email").val(localStorage.getItem("contact_email"));
+        if (localStorage.getItem("contact_message")) $("#message").val(localStorage.getItem("contact_message"));
+
+        // --- SIMPAN DATA SETIAP KALI USER MENGETIK (Real-time) ---
+        $(".form-input").on("input", function() {
+            localStorage.setItem("contact_name", $("#name").val());
+            localStorage.setItem("contact_email", $("#email").val());
+            localStorage.setItem("contact_message", $("#message").val());
+        });
+
+        // Logika Validasi & Submit (Level 5)
+        $("#contactForm").on("submit", function(e) {
+            e.preventDefault();
+            let isValid = true;
+            $(".error-msg").text("");
+            $(".form-input").removeClass("input-error");
+
+            if ($("#name").val().trim() === "") {
+                $("#nameError").text("Nama wajib diisi");
+                $("#name").addClass("input-error");
+                isValid = false;
+            }
+
+            const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+            if (!$("#email").val().match(emailPattern)) {
+                $("#emailError").text("Email tidak valid");
+                $("#email").addClass("input-error");
+                isValid = false;
+            }
+
+            if ($("#message").val().length < 10) {
+                $("#messageError").text("Pesan minimal 10 karakter");
+                $("#message").addClass("input-error");
+                isValid = false;
+            }
+
+            if (isValid) {
+                $(".btn-send").html("<i class='fas fa-spinner fa-spin'></i> Mengirim...").attr("disabled", true);
+                
+                setTimeout(function() {
+                    // --- BERSIHKAN LOCAL STORAGE SETELAH BERHASIL KIRIM ---
+                    localStorage.removeItem("contact_name");
+                    localStorage.removeItem("contact_email");
+                    localStorage.removeItem("contact_message");
+
+                    $("#contactForm").fadeOut(400, function() {
+                        $("#formSuccess").fadeIn();
+                    });
+                }, 1500);
+            }
+        });
+    });
+</script>

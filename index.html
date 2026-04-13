@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>CV Nisa - Interactive SPA</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+    <header>
+        <nav>
+            <div class="logo">🌸 CV</div>
+            <ul id="menu">
+                <li><a href="#" class="nav-link" data-page="home.html">Home</a></li>
+                <li><a href="#" class="nav-link" data-page="about.html">About</a></li>
+                <li><a href="#" class="nav-link" data-page="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main id="content-holder">
+        <div id="loading" style="display:none; color: #f06292; font-weight: bold; margin: 20px;">
+            <i class="fas fa-spinner fa-spin"></i> Memuat...
+        </div>
+        <div id="ajax-content"></div>
+    </main>
+
+    <script>
+        $(document).ready(function() {
+            /**
+             * Fungsi Load Halaman Interaktif
+             * @param {string} url - Target file html
+             * @param {object} element - Elemen anchor yang diklik
+             */
+            function loadPage(url, element) {
+                // 1. Animasi keluar konten lama
+                $("#ajax-content").fadeOut(300, function() {
+                    $('#loading').show();
+                    
+                    // 2. Eksekusi AJAX
+                    $("#ajax-content").load(url, function(response, status, xhr) {
+                        $('#loading').hide();
+                        
+                        if (status == "error") {
+                            $(this).html("<div class='detail-card'><p>Maaf, halaman tidak ditemukan atau gagal dimuat.</p></div>");
+                        }
+                        
+                        // 3. Animasi masuk konten baru (Slide Down)
+                        $(this).hide().slideDown(600);
+                    });
+                });
+
+                // 4. Update Indikator Menu Aktif
+                $(".nav-link").removeClass("active"); // Reset semua menu
+                if (element) {
+                    $(element).addClass("active"); // Set menu yang diklik jadi aktif
+                } else {
+                    // Set default active ke Home jika baru pertama buka
+                    $('.nav-link[data-page="home.html"]').addClass("active");
+                }
+            }
+
+            // Load Home secara otomatis saat pertama kali dibuka
+            loadPage("home.html");
+
+            // Event Listener Klik Menu
+            $(".nav-link").click(function(e) {
+                e.preventDefault();
+                
+                // Jangan load ulang jika mengklik menu yang sudah aktif
+                if($(this).hasClass("active")) return;
+
+                let page = $(this).attr("data-page");
+                loadPage(page, this);
+            });
+        });
+    </script>
+</body>
+</html>
